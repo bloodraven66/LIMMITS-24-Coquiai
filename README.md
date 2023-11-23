@@ -6,9 +6,7 @@ YourTTS Base model with 14 speaker data from challenge dataset (1 hour from each
 
 Track 1 - We share the base model for track 1 (no few shot fine-tuning performed, though it can be done for track1) - https://huggingface.co/SYSPIN/LIMMITS24_ML_basemodel_1hr_14speakers
 
-Track 2 - To be shared soon
-
-Track3 - To be shared soon
+Track 2 - https://huggingface.co/SYSPIN/LIMMITS24_ML_track2 (Trained on CHallenge dataset + VCTK)
 
 Scripts
 ---
