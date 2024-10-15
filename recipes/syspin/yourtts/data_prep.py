@@ -40,9 +40,12 @@ def read(path):
     except:
         return None
         
-def get_files(path, extension='.wav'):
+def get_files(path, extension='.wav', dict = False):
     path = Path(path).expanduser().resolve()
-    return list(path.rglob(f'*{extension}'))
+    files = list(path.rglob(f'*{extension}'))
+    if dict:
+        return {Path(i).stem : i for i in files}
+    return files
 
 def get_durations(path, save_path):
     files = get_files(path)[:args.file_limit]
@@ -69,7 +72,7 @@ def syspin_prep():
             
             manifest_savename = os.path.join(args.manifest_folder, spk + ".tsv")            
             if not os.path.exists(manifest_savename): 
-                txt_files = get_files(os.path.join(args.syspin_raw_data_path, spk), extension='.txt')
+                txt_files = get_files(os.path.join(args.syspin_raw_data_path, spk), extension='.txt', dict = True)
                 with open(duration_file, "r") as f:
                     lines = f.readlines()
                 duration_per_spk = 0
@@ -114,7 +117,7 @@ def target_finetuning_prep():
             get_durations(speaker_folder, duration_file)
         manifest_savename = os.path.join(args.manifest_folder, spk + ".tsv")            
         if not os.path.exists(manifest_savename): 
-            txt_files = get_files(os.path.join(args.syspin_raw_data_path, spk), extension='.txt')
+            txt_files = get_files(os.path.join(args.syspin_raw_data_path, spk), extension='.txt', dict = True)
             with open(duration_file, "r") as f:
                 lines = f.readlines()
             for line in lines:
